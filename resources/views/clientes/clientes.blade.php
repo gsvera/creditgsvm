@@ -1,7 +1,7 @@
 
 @extends('layouts.plantilla')
 @section('body')
-<h1 class="title-4">Clientes</h1>
+<h1 class="pag-title">Clientes</h1>
 @if(session('mensaje'))
 <div class="alert alert-success">
     {{session('mensaje')}}
@@ -12,7 +12,7 @@
 </a>
 
 <table class="table">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th class="text-center" scoper="col">ID</th>
             <th class="text-center" scoper="col">NOMBRE</th>
@@ -23,7 +23,7 @@
             <th class="text-center" scoper="col">ACCIONES</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="thead-light">
     @foreach($clientes as $item)
         <tr>
             <th scope="row" class="text-center">{{$item->id}}</th>

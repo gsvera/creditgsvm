@@ -8,6 +8,8 @@ use App;
 use App\Credito;
 use App\User;
 use App\Cliente;
+use App\Plantillacredito;
+
 
 class CreditController extends Controller
 {
@@ -41,16 +43,40 @@ class CreditController extends Controller
     {
         return view('creditos.lista');
     }
-    public function plantillacredito()
+    public function plantillascredit()
     {
-        return view('creditos.plantillas');
+        $plantillas = App\Plantillacredito::paginate(10);
+        return view('creditos.plantillascredit',compact('plantillas'));
+    }
+    public function crearplantilla()
+    {
+        return view('creditos.crearplantilla');
+    }
+
+    public function guardarplantilla(Request $request)
+    {
+        $request->validate([
+            'nombre_plantilla_credito'=>'required',
+            'interes_plantilla'=>'required',
+            'plazo_plantilla'=>'required'
+        ]);
+
+        $nuevaPlantilla = new App\Plantillacredito;
+
+        $nuevaPlantilla->nombre_plantilla_credito = $request->nombre_plantilla_credito;
+        $nuevaPlantilla->interes_plantilla = $request->interes_plantilla;
+        $nuevaPlantilla->plazo_plantilla = $request->plazo_plantilla;
+
+        $nuevaPlantilla->save();
+
+        return view('creditos.crearplantilla');
     }
 
 
         #FUNCIONES DE CLIENTES
     public function clientes()
     {
-        $clientes = App\Cliente::paginate(10);
+        $clientes = App\Cliente::paginate(5);
         return view('clientes.clientes', compact('clientes'));
     }
     public function nuevousuario()
@@ -78,7 +104,7 @@ class CreditController extends Controller
             'email_cliente'=>'required',
             'numero_cliente'=>'required'
         ]);
-      
+        
 
         $nuevo_cliente = new App\Cliente;
 

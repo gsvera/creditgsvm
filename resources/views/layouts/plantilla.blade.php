@@ -12,7 +12,7 @@
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" href="{{route('creditos.lista')}}">Lista de Créditos</a>
-    <a class="dropdown-item" href="{{route('creditos.plantillas')}}">Plantilla de Crédito</a>
+    <a class="dropdown-item" href="{{route('creditos.crearplantilla')}}">Plantilla de Crédito</a>
     <a class="dropdown-item" href="#">Proximamente...</a>
   </div>
 

@@ -27,7 +27,11 @@ Route::get('/userconfig','CreditController@userconfig')->name('userconfig');
 
 Route::get('/lista','CreditController@lista')->name('creditos.lista');
 
-Route::get('/plantillacredito','CreditController@plantillacredito')->name('creditos.plantillas');
+Route::get('/plantillascredit','CreditController@plantillascredit')->name('creditos.plantillascredit');
+
+Route::get('/crearplantilla','CreditController@crearplantilla')->name('creditos.crearplantilla'); 
+
+Route::post('/guardarplantilla',' CreditController@guardarplantilla')->name('creditos.guardarplantilla');
 
     #ROUTES DE CLIENTES
 
