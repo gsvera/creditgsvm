@@ -23,6 +23,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/userconfig','CreditController@userconfig')->name('userconfig');
 
+Route::post('/crearusuario','CreditController@crearusuario')->name('crearusuario');
+
+Route::get('/niveles','CreditController@niveles')->name('configuser.niveles');
+
+Route::post('/guardarnivel','CreditController@guardarnivel')->name('configuser.guardarnivel');
+
     #ROUTES DE CREDITOS
 
 Route::get('/lista','CreditController@lista')->name('creditos.lista');
@@ -31,7 +37,9 @@ Route::get('/plantillascredit','CreditController@plantillascredit')->name('credi
 
 Route::get('/crearplantilla','CreditController@crearplantilla')->name('creditos.crearplantilla'); 
 
-Route::post('/guardarplantilla',' CreditController@guardarplantilla')->name('creditos.guardarplantilla');
+Route::post('/guardarplantilla','CreditController@guardarplantilla')->name('creditos.guardarplantilla');
+
+Route::get('cotizador','CreditController@cotizador')->name('creditos.cotizador');
 
     #ROUTES DE CLIENTES
 

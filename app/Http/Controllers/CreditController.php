@@ -9,6 +9,7 @@ use App\Credito;
 use App\User;
 use App\Cliente;
 use App\Plantillacredito;
+use App\Role;
 
 
 class CreditController extends Controller
@@ -38,6 +39,61 @@ class CreditController extends Controller
         
         return view('userconfig',compact('usuario'));
     }
+    public function actualizarusuario(Request $request, $id)
+    {
+        $usuarioActualizar = App\User::findOrFail($id);
+
+        $usuarioActualizar->name = $request->name;
+        $usuarioActualizar->rol = $request->rol;
+        $usuarioActualizar->email = $request->email;
+        // $usuarioActualizar->password = Hash::make($request['password']);
+        $usuarioActualizar->password = bcrypt($request->password);
+
+        $usuarioActualizar->save();
+
+        return back()->with('mensaje','Datos guardados');
+    }
+    public function crearusuario(Request $request)
+    {   
+               
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'rol'=>'required',
+            'password'=>'required'
+        ]);
+        $nuevoUsuario = new App\User;
+
+        $nuevoUsuario->name = $request->name;
+        $nuevoUsuario->email = $request->email;
+        $nuevoUsuario->rol = $request->rol;
+        $nuevoUsuario->password = bcrypt($request->password);
+
+        $nuevoUsuario->save();
+
+        return back()->with('mensaje','Nuevo usuario guardado con exito!');
+    }
+
+    public function niveles()
+    {
+        return view('configuser.niveles');
+    }
+    public function guardarnivel(Request $request)
+    {
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required'
+        ]);
+        $nuevoNivel = new App\Role;
+        
+        $nuevoNivel->name = $request->name;
+        $nuevoNivel->rol = $request->name;
+        $nuevoNivel->description = $request->description;
+        $nuevoNivel->save();
+
+        return back()->with('mensaje','Nuevo rol creado de ');
+    }
+
         #FUNCIONES DE CREDITO
     public function lista()
     {
@@ -50,17 +106,20 @@ class CreditController extends Controller
     }
     public function crearplantilla()
     {
-        return view('creditos.crearplantilla');
+        $plantillas = App\Plantillacredito::paginate(5);
+        return view('creditos.crearplantilla',compact('plantillas'));
     }
+    
 
     public function guardarplantilla(Request $request)
     {
+        
         $request->validate([
             'nombre_plantilla_credito'=>'required',
             'interes_plantilla'=>'required',
             'plazo_plantilla'=>'required'
         ]);
-
+        
         $nuevaPlantilla = new App\Plantillacredito;
 
         $nuevaPlantilla->nombre_plantilla_credito = $request->nombre_plantilla_credito;
@@ -68,14 +127,17 @@ class CreditController extends Controller
         $nuevaPlantilla->plazo_plantilla = $request->plazo_plantilla;
 
         $nuevaPlantilla->save();
-
-        return view('creditos.crearplantilla');
+        
+        return back()->with('mensaje','Plantilla guardada con exito!');
     }
-
-
+    public function cotizador()
+    {
+        return view('creditos.cotizador');
+    }
         #FUNCIONES DE CLIENTES
     public function clientes()
     {
+        
         $clientes = App\Cliente::paginate(5);
         return view('clientes.clientes', compact('clientes'));
     }
@@ -86,10 +148,12 @@ class CreditController extends Controller
 
     Public function crearcliente()
     {
+        
         return view('clientes.crearcliente');
     }
     public function guardarcliente(Request $request)
     {
+        
         $request->validate([
             'nombre'=>'required',
             'apellido'=>'required',
@@ -139,8 +203,9 @@ class CreditController extends Controller
 
         return back()->with('mensaje','Cliente Eliminado Con Exito');
     }
-    function editarcliente($id)
+    function editarcliente(Request $request, $id)
     {
+        // $request->user()->authorizeRoles('Admin');
         $cliente = App\Cliente::findOrFail($id);
 
         return view('clientes.editarcliente',compact('cliente'));
@@ -148,6 +213,7 @@ class CreditController extends Controller
 
     function actualizarcliente(Request $request, $id)
     {
+
         $clientes = App\Cliente::findOrFail($id);
 
         
@@ -175,17 +241,7 @@ class CreditController extends Controller
 
         return back()->with('mensaje','Cliente actualizado con exito!');
     }
-    public function actualizarusuario(Request $request, $id)
-    {
-        $usuarioActualizar = App\User::findOrFail($id);
-        $usuarioActualizar->name = $request->name;
-        $usuarioActualizar->email = $request->email;
-        $usuarioActualizar->password = $request->password;
-
-        $usaurioActualizar->save();
-
-        return back()->with('mensaje','Datos guardados');
-    }
+   
     /**
      * Show the form for creating a new resource.
      *
