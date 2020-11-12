@@ -1,13 +1,12 @@
 @extends('layouts.plantilla')
 @section('body')
 
+
+<h1 class="title-4">Nueva plantilla de Credito</h1>
 <form action="{{route('creditos.guardarplantilla')}}" method="POST">
 @csrf
 
- <div class="">
-        <h5 class="modal-title" id="exampleModalLabel">Nueva plantilla de Credito</h5>
- </div>
- <div class="">
+ <div class="container">
     <div class="form-row">
         <label class="strong" for="">Nombre de la Plantilla</label>
         <input type="text" class="form-control" name="nombre_plantilla_credito">
@@ -27,5 +26,24 @@
     </div>
 </div>   
 </form>
+<div class="container col-2">
+<table>
+
+@foreach($plantillas as $plantilla)
+    <div class="div-target">
+  <div class="card-header">
+    <h5 class="">{{$plantilla->nombre_plantilla_credito}}</h5>
+  </div>
+  <div class="container container-card">
+    <Label class="strong">Interes</Label>
+    <p class="text-card">{{$plantilla->interes_plantilla}}</p>
+    <label class="strong">Plazo</label>
+    <p class="text-card">{{$plantilla->plazo_plantilla}}</p>
+  </div>
+
+  @endforeach
+  </table>
+  </div>
+  {{$plantillas->links()}}
 
 @endsection

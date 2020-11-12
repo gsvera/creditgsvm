@@ -38,6 +38,15 @@ class CreditController extends Controller
         
         return view('userconfig',compact('usuario'));
     }
+    public function crearniveles()
+    {
+        return view('configuser.niveles');
+    }
+
+
+
+
+
         #FUNCIONES DE CREDITO
     public function lista()
     {

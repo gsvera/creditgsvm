@@ -79,7 +79,7 @@
                     @else
                         
                         
-                        <!-- <a href="{{ route('login') }}">Iniciar Sesión</a> -->
+                        <a href="{{ route('login') }}">Iniciar Sesión</a>
                                                 
                         <a href="{{ route('register') }}">Registro</a>
                     @endauth

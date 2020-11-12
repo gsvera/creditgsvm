@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/userconfig','CreditController@userconfig')->name('userconfig');
 
+Route::get('/niveles','CreditController@crearniveles')->name('configuser.niveles');
     #ROUTES DE CREDITOS
 
 Route::get('/lista','CreditController@lista')->name('creditos.lista');

@@ -1,77 +1,46 @@
 @extends('layouts.plantilla')
-
 @section('body')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+    <h1 class="title-4">Nuevo Usuario</h1>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <form action="{{route('crearusuario')}}" method="POST" class="form-center ">
+    
+    @csrf
+        <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"><span class="strong">Nombre</span></label>
+            <div class="col-sm-8">
+                <input name="name" type="text" class="form-control" id="">
+            </div>
+        </div>    
+        <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"><span class="strong">Usuario</span></label>
+            <div class="col-sm-8">
+                <input name="email" type="text" class="form-control" id="" value="">
             </div>
         </div>
-    </div>
-</div>
+        <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"><span class="strong">Rol</span></label>
+            <div class="col-sm-8">
+                <select name="rol" id="" class="custom-select">
+                    <option ></option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"><span class="strong">Contraseña</span></label>
+            <div class="col-sm-8">
+                <input name="password" type="text" class="form-control" id="" value="">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Crear</button>
+        
+</form>
+
+@if(session('mensaje'))
+
+    <div class="alert alert-success">{{session('mensaje')}}</div>
+@endif
+
 @endsection

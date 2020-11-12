@@ -31,9 +31,9 @@
             font-weight: bold;
         }
         .form-center{
-            margin: 25px 200px 0 200px;
+            margin: 25px 100px 20px 200px;
             width:410px;
-            height:250px;
+            height:300px;
             padding: 20px 15px 0 15px;
             box-shadow: 1px 2px 3px 1px rgba(0,0,0,.8);
             background-color: rgb(219,219,219);
